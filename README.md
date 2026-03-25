@@ -2,11 +2,11 @@
 
 Integrates pose detection and skeletal analysis with [Badminton-Analysis](https://github.com/ToanNguyenKhanh/Badminton-Analysis) project.
 
-## 🎯 Demo Posters
+## 🎯 Demo Outputs
 
-| Poster V1 | Poster V2 |
-|----------|-----------|
-| ![Poster Preview](./poster_preview.png) | ![Poster V2](./poster_v2.png) |
+| Frame Analysis | Detection Result |
+|----------------|------------------|
+| ![Demo Frame](./demo_frame.jpg) | ![Demo Screenshot](./demo_screenshot.png) |
 
 ## Features
 
