@@ -193,11 +193,18 @@ class IntegratedPipeline:
         # 绘制羽毛球 + 标签（点上方）
         if frame_data.shuttle:
             cx, cy = map(int, frame_data.shuttle)
+            h, w = frame.shape[:2]
             cv2.circle(frame, (cx, cy), 8, (0, 255, 0), -1)
             cv2.rectangle(frame, (cx - 11, cy - 11), (cx + 11, cy + 11), (0, 255, 0), 2)
 
             s_label = "SHUTTLE"
-            stx, sty = cx - 10, max(24, cy - 18)
+            (tw, th), _ = cv2.getTextSize(s_label, cv2.FONT_HERSHEY_SIMPLEX, 0.8, 2)
+            # 默认放在点上方偏右；若会出界则改到左侧
+            stx = cx + 12
+            if stx + tw > w - 4:
+                stx = max(4, cx - tw - 12)
+            sty = max(th + 4, cy - 14)
+
             cv2.putText(frame, s_label, (stx, sty), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 4)
             cv2.putText(frame, s_label, (stx, sty), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
 
