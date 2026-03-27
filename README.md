@@ -8,6 +8,10 @@ Integrates pose detection and skeletal analysis with [Badminton-Analysis](https:
 |----------------|------------------|
 | ![Demo Frame](./demo_frame.jpg) | ![Demo Screenshot](./demo_screenshot.png) |
 
+### Latest Progress GIF
+
+![Badminton Long Demo](./demo/gif/badminton_github_long.gif)
+
 ## Features
 
 - **Player Tracking**: Uses original project's YOLO model for player bounding boxes
