@@ -73,11 +73,13 @@ python -m src.pipeline.runner thisone.mp4 -o output_demo -i 2 -m 3000
 
 ## Demo (Latest)
 
-![截屏2026-03-25 01.40.31](./demo/gif/截屏2026-03-25%2001.40.31.png)
-
-![frame_0010](./demo/gif/frame_0010.jpg)
-
-![badminton_github_long](./demo/gif/badminton_github_long.gif)
+<table>
+  <tr>
+    <td><img src="./demo/gif/%E6%88%AA%E5%B1%8F2026-03-25%2001.40.31.png" alt="screenshot" width="320"/></td>
+    <td><img src="./demo/gif/frame_0010.jpg" alt="frame_0010" width="320"/></td>
+    <td><img src="./demo/gif/badminton_github_long.gif" alt="badminton_github_long" width="320"/></td>
+  </tr>
+</table>
 
 ## Notes
 
