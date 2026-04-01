@@ -9,6 +9,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 import joblib
 
+class ModelNotTrainedError(Exception):
+    """Raised when predictor is used before being trained."""
+    pass
+
+
 class PointOutcomePredictor:
     def __init__(self):
         self.model = None

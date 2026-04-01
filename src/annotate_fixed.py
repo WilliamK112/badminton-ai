@@ -39,7 +39,7 @@ def draw_court(img, corners, drag_idx):
     return display
 
 def mouse_event(event, x, y, flags, param):
-    global corners, dragging, drag_idx
+    global dragging, drag_idx
     
     if event == cv2.EVENT_LBUTTONDOWN:
         drag_idx = -1

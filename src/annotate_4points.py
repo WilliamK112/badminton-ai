@@ -14,8 +14,6 @@ points = []
 current_frame = 0
 
 def mouse_handler(event, x, y, flags, img):
-    global points
-    
     if event == cv2.EVENT_LBUTTONDOWN:
         if len(points) < 4:
             points.append((x, y))

@@ -15,8 +15,6 @@ window_name = "Click 4 court corners - TopLeft, TopRight, BottomRight, BottomLef
 
 
 def mouse_callback(event, x, y, flags, param):
-    global corners
-    
     if event == cv2.EVENT_LBUTTONDOWN:
         if len(corners) < 4:
             corners.append((x, y))
