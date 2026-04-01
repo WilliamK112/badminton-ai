@@ -26,6 +26,27 @@ A practical badminton video analysis pipeline focused on **stable 2-player track
   </tr>
 </table>
 
+## 3D Skeleton Reconstruction Demos
+
+> **Downloadable artifacts:** Replay3D package artifacts (包含完整 3D 预览视频) 可在 GitHub Actions workflow 页面下载，14天有效。
+> 下载方式：Workflow → 运行记录 → Artifacts → `replay3d-ci-package-<run_id>`
+
+**Top-down court view — skeleton limb rendering:**
+
+| Frame 30 | Frame 130 |
+|----------|-----------|
+| <img src="./demo/q2p_random10_v4_skeleton/q2p_v4_skeleton_000030.jpg" alt="frame 30" width="420"/> | <img src="./demo/q2p_random10_v4_skeleton/q2p_v4_skeleton_000130.jpg" alt="frame 130" width="420"/> |
+
+| Frame 175 | Frame 285 |
+|----------|-----------|
+| <img src="./demo/q2p_random10_v4_skeleton/q2p_v4_skeleton_000175.jpg" alt="frame 175" width="420"/> | <img src="./demo/q2p_random10_v4_skeleton/q2p_v4_skeleton_000285.jpg" alt="frame 285" width="420"/> |
+
+| Frame 350 | Frame 945 |
+|----------|-----------|
+| <img src="./demo/q2p_random10_v4_skeleton/q2p_v4_skeleton_000350.jpg" alt="frame 350" width="420"/> | <img src="./demo/q2p_random10_v4_skeleton/q2p_v4_skeleton_000945.jpg" alt="frame 945" width="420"/> |
+
+> Full video previews: `thisone_full_v4_preview.mp4`, `thisone_full_v5_preview.mp4`, `thisone_full_v6_preview.mp4` (in `reports/` — see artifact download above)
+
 ## About
 
 This project is built for demo-ready, reproducible badminton analysis outputs from match videos.
