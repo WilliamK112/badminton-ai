@@ -53,9 +53,7 @@ A practical badminton video analysis pipeline focused on **stable 2-player track
 
 **3D box summary (v11b — latest):**
 
-| 3D Court Box Summary |
-|----------|
-| <img src="./demo/box_3d/v5_3d_summary.png" alt="3D court box summary" width="800"/> |
+| <img src="./demo/box_3d/v5_3d_summary.png" alt="3D court box" width="800"/> |
 
 **3D skeleton replay (v11b — latest):**
 
