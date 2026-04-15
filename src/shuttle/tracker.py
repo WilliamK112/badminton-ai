@@ -98,6 +98,27 @@ class ShuttleTracker:
         _, bbox, conf = candidates[0]
         return bbox, conf
 
+    def _downup_variant(self, frame: np.ndarray, scale: float = 0.8) -> np.ndarray:
+        h, w = frame.shape[:2]
+        small = cv2.resize(frame, None, fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
+        return cv2.resize(small, (w, h), interpolation=cv2.INTER_LINEAR)
+
+    def _jpeg_variant(self, frame: np.ndarray, quality: int = 95) -> Optional[np.ndarray]:
+        ok, enc = cv2.imencode('.jpg', frame, [int(cv2.IMWRITE_JPEG_QUALITY), int(quality)])
+        if not ok:
+            return None
+        return cv2.imdecode(enc, cv2.IMREAD_COLOR)
+
+    def _detect_with_rescue_variants(self, frame: np.ndarray) -> Optional[Tuple[List[float], float]]:
+        """在原始帧 miss 时，用轻量变体做二次抢救。"""
+        for variant in (self._downup_variant(frame, scale=0.8), self._jpeg_variant(frame, quality=95)):
+            if variant is None:
+                continue
+            det = self._detect_bbox(variant, self.model, self.class_candidates, use_track_mode=False)
+            if det is not None:
+                return det
+        return None
+
     def _interpolate_center(self, frame_idx: int) -> Optional[Tuple[float, float]]:
         """参考 Badminton-Analysis 思路：对缺失中心点线性插值。"""
         if len(self._recent_obs) < 2:
@@ -120,7 +141,10 @@ class ShuttleTracker:
         """检测单帧羽毛球，返回中心点 (cx, cy) 像素坐标。"""
         # 1) 主模型（Badminton-Analysis 专用 shuttle）
         det = self._detect_bbox(frame, self.model, self.class_candidates, use_track_mode=self.use_track_mode)
-        # 2) 主模型 miss 时，辅助模型兜底（COCO sports ball=32）
+        # 2) 主模型 miss 时，尝试轻量 rescue 变体，补 raw 帧首帧/压缩差异 miss
+        if det is None:
+            det = self._detect_with_rescue_variants(frame)
+        # 3) 仍 miss 时，辅助模型兜底（COCO sports ball=32）
         if det is None:
             det = self._detect_bbox(frame, self.fallback_model, {32}, use_track_mode=False)
 
