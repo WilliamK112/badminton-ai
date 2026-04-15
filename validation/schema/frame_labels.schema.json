@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Badminton validation frame label",
+  "type": "object",
+  "required": [
+    "video_path",
+    "frame_idx",
+    "image_path",
+    "image_width",
+    "image_height",
+    "players",
+    "shuttle",
+    "pose"
+  ],
+  "properties": {
+    "video_path": { "type": "string" },
+    "frame_idx": { "type": "integer", "minimum": 0 },
+    "image_path": { "type": "string" },
+    "image_width": { "type": "integer", "minimum": 1 },
+    "image_height": { "type": "integer", "minimum": 1 },
+    "players": {
+      "type": "object",
+      "required": ["P1", "P2"],
+      "properties": {
+        "P1": { "$ref": "#/$defs/player" },
+        "P2": { "$ref": "#/$defs/player" }
+      }
+    },
+    "shuttle": {
+      "type": "object",
+      "required": ["visible", "x", "y"],
+      "properties": {
+        "visible": { "type": "boolean" },
+        "x": { "type": ["number", "null"] },
+        "y": { "type": ["number", "null"] }
+      }
+    },
+    "pose": {
+      "type": "object",
+      "properties": {
+        "P1": { "$ref": "#/$defs/keypoints" },
+        "P2": { "$ref": "#/$defs/keypoints" }
+      }
+    }
+  },
+  "$defs": {
+    "bbox": {
+      "type": ["array", "null"],
+      "minItems": 4,
+      "maxItems": 4,
+      "items": { "type": "number" }
+    },
+    "player": {
+      "type": "object",
+      "required": ["bbox"],
+      "properties": {
+        "bbox": { "$ref": "#/$defs/bbox" }
+      }
+    },
+    "keypoints": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": { "type": "number" }
+      }
+    }
+  }
+}
+

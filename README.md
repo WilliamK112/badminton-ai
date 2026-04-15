@@ -113,6 +113,75 @@ Output includes:
 
 ## Quick Start
 
+### Live camera / real-time overlay MVP
+
+This repo now has a real-time 2D overlay demo for webcam or video input.
+
+What it does:
+- live player boxes
+- live pose skeleton overlay
+- live shuttle marker
+- optional raw recording + annotated recording + per-frame JSONL metadata
+
+Install demo dependencies first if needed:
+
+```bash
+pip install ultralytics opencv-python numpy scipy pandas
+```
+
+Run with webcam:
+
+```bash
+cd badminton-machine-learning
+python scripts/live_overlay_demo.py --source 0 --output-dir live_output
+```
+
+Run with a video file:
+
+```bash
+cd badminton-machine-learning
+python scripts/live_overlay_demo.py --source badminton_sample.mp4 --output-dir live_output
+```
+
+Useful flags:
+
+```bash
+--pose-every 2      # run pose every 2 frames to improve speed
+--no-display        # record without preview window
+--max-frames 300    # short smoke test
+```
+
+Outputs:
+- `live_output/raw.mp4`
+- `live_output/annotated.mp4`
+- `live_output/frames.jsonl`
+
+## Validation / Accuracy Benchmarking
+
+A full validation workflow now exists in this repo.
+
+See:
+- `VALIDATION.md`
+
+It includes:
+- benchmark frame extraction
+- manual player/shuttle annotation
+- prediction export on labeled frames
+- automatic scoring for shuttle, player boxes, and optional pose keypoints
+- one-command benchmark bundle generation for repeatable regression review
+
+Quick bundle example:
+
+```bash
+.venv/bin/python scripts/run_benchmark_bundle.py \
+  --video badminton_sample.mp4 \
+  --out-dir validation/bundles/fullcourt12 \
+  --every 45 \
+  --max-frames 24 \
+  --indices 7,8,9,10,11,12,13,14,20,21,22,23 \
+  --with-pose
+```
+
 ### 2D→3D Skeleton Lifting
 
 ```bash

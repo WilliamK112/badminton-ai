@@ -10,6 +10,7 @@ PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.integration.pipeline import IntegratedPipeline, RallyAnalyzer
+from src.model_defaults import pick_player_model, pick_pose_model, pick_shuttle_model
 from src.utils.video import VideoReader, VideoWriter
 
 
@@ -33,17 +34,18 @@ def run_pipeline(
     print("\n[1/4] 初始化模块...")
 
     # 优先使用 Badminton-Analysis 的专用羽毛球模型；不存在时回退通用模型
-    shuttle_model_path = Path("/Users/William/.openclaw/workspace/Badminton-Analysis/train/shuttle_output/models/weights/best.pt")
-    shuttle_model = str(shuttle_model_path) if shuttle_model_path.exists() else "yolo11n.pt"
+    player_model = pick_player_model(None)
+    shuttle_model = pick_shuttle_model(None)
+    pose_model = pick_pose_model(None)
 
     pipeline = IntegratedPipeline(
-        player_model="yolo11n.pt",
+        player_model=player_model,
         shuttle_model=shuttle_model,
-        pose_model="yolo11n-pose.pt"
+        pose_model=pose_model
     )
-    print("  ✓ 球员追踪器")
+    print(f"  ✓ 球员追踪器 ({Path(player_model).name})")
     print(f"  ✓ 羽毛球追踪器 ({Path(shuttle_model).name})")
-    print("  ✓ 骨架检测器")
+    print(f"  ✓ 骨架检测器 ({Path(pose_model).name})")
     
     # 2. 处理视频
     print(f"\n[2/4] 处理视频: {video_path}")

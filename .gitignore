@@ -38,3 +38,17 @@ autopilot_log.md
 output_*/
 reports/
 demo/gif/palette*.png
+live_output/
+live_smoke/
+live_smoke2/
+live_smoke3/
+badminton_sample.mp4
+validation/**/frames/
+validation/**/manifest.jsonl
+validation/**/labels*.jsonl
+validation/**/predictions.jsonl
+validation/**/*.generic*.jsonl
+validation/**/*.eval.json
+validation/**/*.eval.md
+validation/**/review/
+validation/**/bundle.summary.json
